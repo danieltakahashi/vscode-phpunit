@@ -19,6 +19,14 @@ class RemotePhpUnitCommand extends phpunit_1.PhpUnitCommand {
         return this.remapLocalPath(super.binary);
     }
     /**
+     * Get configuration path file on remote host.
+     *
+     * @return {string}
+     */
+    get configuration() {
+        return this.remapLocalPath(super.configuration);
+    }
+    /**
      * Get actual command to run.
      *
      * @return {string}
@@ -50,9 +58,7 @@ class RemotePhpUnitCommand extends phpunit_1.PhpUnitCommand {
      */
     remapLocalPath(actualPath) {
         for (const [localPath, remotePath] of Object.entries(this.paths)) {
-            if (actualPath.startsWith(localPath)) {
-                return actualPath.replace(localPath, remotePath);
-            }
+            return actualPath.replace(localPath, remotePath);
         }
         return actualPath;
     }
